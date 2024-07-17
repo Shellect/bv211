@@ -1,0 +1,18 @@
+extends layout.pug
+
+block content
+    div.row.mt-3
+        div.col-6.offset-3.border.rounded.bg-light.p-3
+            h2.text-center Registration
+            form(method="post" action="/signup")
+                label(for="user-email").form-label.mt-3 Email:
+                input#user-email(type="email" name="email").form-control
+
+                label(for="user-pass").form-label.mt-3 Password:
+                input#user-pass(type="password" name="password").form-control
+
+                label(for="user-repeat").form-label.mt-3 Repeat pasword:
+                input#user-repeat(type="password" name="repeat_pass").form-control
+
+                div.d-grid.mt-3
+                    button.btn.btn-primary Sign Up

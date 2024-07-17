@@ -1,0 +1,27 @@
+extends layout.pug
+
+block content
+    form.row.mt-3(method="post" action="/profile")
+        h5 User info
+        .col-6
+            label.form-label.mt-3(for="username") First name:
+            input#username.form-control(name="username")
+
+            label.form-label.mt-3(for="birthdate") Birthdate:
+            input#birthdate.form-control(type="date" name="birthdate")
+
+            label.form-label.mt-3(for="phone") Phone:
+            input#phone.form-control(name="phone")
+        .col-6
+            label.form-label.mt-3(for="lastname") Last name:
+            input#lastname.form-control(name="lastname")
+
+            label.form-label.mt-3(for="gender") Gender:
+            select#gender.form-select(name="gender")
+                option(value="m") Male
+                option(value="f") Female
+
+            label.form-label.mt-3(for="email") Email:
+            input#email.form-control(type="email" name="email")
+        .d-grid.mt-3
+            button.btn.btn-primary Save
