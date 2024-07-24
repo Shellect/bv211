@@ -3,14 +3,14 @@ html(lang="en")
     head
         meta(charset="UTF-8")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        link(rel="stylesheet" href="/master.css")
+        link(rel="stylesheet" href="/public/master.css")
         title Lorem Ipsum
     body 
         header.p-3.mb-3.border-bottom
             .container
                 .d-flex.flex-wrap.align-items-center.justify-content-center.justify-content-lg-start
                     a.d-flex.align-items-center.mb-2.mb-lg-0.link-body-emphasis.text-decoration-none(href='/')
-                        img.me-2(width='32' height='32' src="/images/logo.jpg")
+                        img.me-2(width='32' height='32' src="/public/images/logo.jpg")
                     ul.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0
                         li
                             a.nav-link.px-2.link-secondary(href='/') Главная
@@ -38,4 +38,4 @@ html(lang="en")
                                 a.dropdown-item(href='#') Sign out
         main.container
             block content
-        script(src="/main.bundle.js") 
+        script(src="/public/main.bundle.js")

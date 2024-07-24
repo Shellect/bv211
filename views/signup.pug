@@ -7,11 +7,17 @@ block content
             form(method="post" action="/signup")
                 label(for="user-email").form-label.mt-3 Email:
                 input#user-email(type="email" name="email").form-control
+                if errors.email
+                    each error in errors.email
+                        p.text-danger.my-0.text-right= error
 
                 label(for="user-pass").form-label.mt-3 Password:
                 input#user-pass(type="password" name="password").form-control
+                if errors.password
+                    each error in errors.password
+                        p.text-danger.my-0.text-right= error
 
-                label(for="user-repeat").form-label.mt-3 Repeat pasword:
+                label(for="user-repeat").form-label.mt-3 Repeat password:
                 input#user-repeat(type="password" name="repeat_pass").form-control
 
                 div.d-grid.mt-3

@@ -1,0 +1,22 @@
+services:
+  webserver:
+    image: nginx:stable-alpine3.19
+    volumes:
+      - ./public:/usr/share/nginx/html/public
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 3000:80
+    environment:
+      - NGINX_ENTRYPOINT_QUIET_LOGS=1 # Silence container startup.
+  node:
+    build: .
+    env_file:
+      - .env
+    volumes:
+      - ./public:/application/public
+      - ./src:/application/src
+      - ./views:/application/views
+      - ./server.js:/application/server.js
+  database:
+    image: mongo
+    command: --quiet
