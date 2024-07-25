@@ -1,6 +1,5 @@
 const express = require('express');
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const session = require("express-session");
 const {MongoClient} = require("mongodb");
 const {z, ZodError} = require("zod");
@@ -25,12 +24,21 @@ const User = z.object({
     path: ["email"]
 });
 
-async function insertUser(data) {
+async function insertUser(email, password) {
     const {email, password} = data;
     await client.connect();
     const db = client.db(process.env.MONGODB_NAME);
     const users = db.collection('users');
     const result = await users.insertOne({email, password});
+    await client.close();
+    return result;
+}
+
+async function findUser(email) {
+    await client.connect();
+    const db = client.db(process.env.MONGODB_NAME);
+    const users = db.collection('users');
+    const result = await users.findOne({email});
     await client.close();
     return result;
 }
@@ -44,8 +52,8 @@ app.use(session({
     saveUninitialized: true
 }));
 
-function isAuthenticated(req, res, next){
-    if(req.session.user) next()
+function isAuthenticated(req, res, next) {
+    if (req.session.user) next()
     else next('route')
 }
 
@@ -60,16 +68,10 @@ app.get('/signup', (req, res) => {
 app.post('/signup', async (req, res, next) => {
     try {
         const {email, password} = User.parse(req.body);
-        await insertUser({email, password});
-        const token = await jwt.sign({email}, process.env.AUTH_SECRET);
-        req.session.regenerate(err => {
-            if (err) next(err);
-            req.session.accessToken = token;
-            req.session.save(err => {
-                if (err) next(err);
-                res.redirect("/profile");
-            })
-        })
+        await insertUser(email, password);
+
+        // TODO: make authentication
+        res.redirect("/profile");
     } catch (e) {
         if (e instanceof ZodError) {
             return res.render("signup", {errors: e.flatten().fieldErrors});
@@ -78,8 +80,12 @@ app.post('/signup', async (req, res, next) => {
     }
 });
 
-app.get('/signin', (req, res) => {
+app.get('/signin', async (req, res) => {
+    const {email, password} = req.body;
+    const existingUser = await findUser({email});
+    if (bcrypt.compare(existingUser.password, password)) {
 
+    }
 });
 
 app.get('/profile', (req, res) => {
