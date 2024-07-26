@@ -17,6 +17,9 @@ services:
       - ./src:/application/src
       - ./views:/application/views
       - ./server.js:/application/server.js
-  database:
-    image: mongo
+  mongodb:
+    image: mongo:latest
     command: --quiet
+  redis:
+    image: redis:latest
+    container_name: redis_container
