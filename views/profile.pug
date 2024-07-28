@@ -1,27 +1,28 @@
 extends layout.pug
 
 block content
-    form.row.mt-3(method="post" action="/profile")
-        h5 User info
-        .col-6
-            label.form-label.mt-3(for="username") First name:
-            input#username.form-control(name="username")
+    form.row.mt-5(method="post" action="/profile")
+        h5.text-center User info
+        .col-4.offset-2
+            label.form-label.mt-4(for="username") First name:
+            input#username.form-control(name="username" value=user.username)
 
-            label.form-label.mt-3(for="birthdate") Birthdate:
-            input#birthdate.form-control(type="date" name="birthdate")
+            label.form-label.mt-4(for="birthdate") Birthdate:
+            input#birthdate.form-control(type="date" name="birthdate" value=user.birthdate)
 
-            label.form-label.mt-3(for="phone") Phone:
-            input#phone.form-control(name="phone")
-        .col-6
-            label.form-label.mt-3(for="lastname") Last name:
-            input#lastname.form-control(name="lastname")
+            label.form-label.mt-4(for="phone") Phone:
+            input#phone.form-control(name="phone" value=user.phone)
+        .col-4
+            label.form-label.mt-4(for="lastname") Last name:
+            input#lastname.form-control(name="lastname" value=user.last_name)
 
-            label.form-label.mt-3(for="gender") Gender:
+            label.form-label.mt-4(for="gender") Gender:
             select#gender.form-select(name="gender")
-                option(value="m") Male
-                option(value="f") Female
+                option(value="m" selected= user.gender === "m") Male
+                option(value="f" selected= user.gender === "f") Female
 
-            label.form-label.mt-3(for="email") Email:
-            input#email.form-control(type="email" name="email")
-        .d-grid.mt-3
-            button.btn.btn-primary Save
+            label.form-label.mt-4(for="email") Email:
+            input#email.form-control(type="email" name="email" value=user.email)
+        .col-8.offset-2
+            .d-grid.mt-4
+                button.btn.btn-primary Save

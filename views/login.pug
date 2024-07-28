@@ -1,0 +1,17 @@
+extends layout.pug
+
+block content
+    div.row.mt-3
+        div.col-6.offset-3.border.rounded.bg-light.p-3
+            h2.text-center Registration
+            form(method="post" action="/login")
+                label(for="user-email").form-label.mt-3 Email:
+                input#user-email(type="email" name="email").form-control
+                if error
+                    p.text-danger.my-0.text-right= error
+
+                label(for="user-pass").form-label.mt-3 Password:
+                input#user-pass(type="password" name="password").form-control
+
+                div.d-grid.mt-3
+                    button.btn.btn-primary Войти
