@@ -1,20 +1,17 @@
 {
-  "name": "lesson_15",
+  "name": "express_example",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "build-css": "sass ./src/master.scss ./public/master.css",
-    "build-js": "webpack"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
-    "bootstrap": "^5.3.3",
     "connect-redis": "^7.1.1",
     "express": "^4.19.2",
     "express-session": "^1.18.0",
@@ -24,8 +21,5 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
-    "sass": "^1.77.8",
-    "webpack": "^5.93.0",
-    "webpack-cli": "^5.1.4"
   }
 }

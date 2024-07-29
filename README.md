@@ -1,13 +1,25 @@
-## Express application example
+# Express application example
 
 ###### Учебный проект, демонстрирующий использование JS на сервере
+
+---
+
+Все действия в руководстве приведены для Ubuntu.
 
 Используемые библиотеки и технологии
 - Express
 - Pug
 - MongoDB
 - Redis
+
+Необходимые программы:
+- Git
 - Docker
+
+---
+
+ Клонируйте этот репозиторий:
+```git clone git@github.com:Shellect/express-example.git```
 
 ---
 
@@ -17,8 +29,6 @@ openssl rand -base64 60
 ```
 ___
 
-Проект в разработке. 
-План работы:
-- [x] Сохранение сессии в redis 
-- [x] Добавить форму аутентификации
-- [x] Изменить шапку сайта
+Запустите контейнеры 
+``docker compose up``
+Перейдите по адресу http://localhost:3000

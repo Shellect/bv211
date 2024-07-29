@@ -63,7 +63,7 @@ app.post('/signup', express.urlencoded({extended: true}), async (req, res) => {
                 "email": email,
                 "password": hashedPassword,
                 "username": "",
-                "last_name": "",
+                "lastname": "",
                 "birthdate": "",
                 "gender": "m",
                 "phone": ""
@@ -125,30 +125,37 @@ app.post('/login', express.urlencoded({extended: true}), async (req, res) => {
     }
 });
 
-app.get('/profile', (req, res) => {
+app.get('/profile', async (req, res) => {
     if (req.session.user) {
-        res.render('profile', {user: req.session.user});
+        const user = await dbClient.db(process.env.MONGO_NAME)
+            .collection('users')
+            .findOne({_id: new ObjectId(req.session.user.id)})
+        res.render('profile', {user});
     } else {
         res.redirect('/signup');
     }
 });
 
-app.post('/profile', (req, res) => {
-    const {email, password, username, last_name, birthdate, gender, phone} = req.body;
-    // update user in database
+app.post('/profile', express.urlencoded({extended: true}), async (req, res) => {
+    await dbClient.db(process.env.MONGO_NAME)
+        .collection('users')
+        .updateOne({_id: new ObjectId(req.session.user.id)}, {
+            $set: req.body
+        });
+    res.redirect('/')
 })
 
 dbClient.connect()
     .then(client => client.db(process.env.MONGODB_NAME).command({ping: 1}))
     .then(doc => {
-        console.info("MongoDB connected successfully.");
+        console.info("MongoDB connected successfully. Pong from server:");
         console.info(doc);
         return redisClient.connect();
     })
     .then(() => redisClient.ping())
     .then(response => {
         console.log("Redis connected successfully. " + response + " received")
-        app.listen(3000, () => console.log("Server started at http://localhost:3000"))
+        app.listen(3000, () => console.log("Express server started at http://localhost:3000"))
     })
     .catch(console.error);
 

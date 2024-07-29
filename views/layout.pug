@@ -3,14 +3,15 @@ html(lang="en")
     head
         meta(charset="UTF-8")
         meta(name="viewport" content="width=device-width, initial-scale=1.0")
-        link(rel="stylesheet" href="/public/master.css")
+        link(rel="icon" type="image/x-icon" href="/public/favicon.ico")
+        link(rel="stylesheet" href="/public/bootstrap.min.css")
         title Lorem Ipsum
     body
         header.p-3.mb-3.border-bottom
             .container
                 .d-flex.flex-wrap.align-items-center.justify-content-center.justify-content-lg-start
                     a.d-flex.align-items-center.mb-2.mb-lg-0.link-body-emphasis.text-decoration-none(href='/')
-                        img.me-2(width='32' height='32' src="/public/images/logo.jpg")
+                        img.me-2(width='32' height='32' src="/public/logo.jpg")
                     ul.nav.col-12.col-lg-auto.me-lg-auto.mb-2.justify-content-center.mb-md-0
                         li
                             a.nav-link.px-2.link-secondary(href='/') Главная
@@ -24,8 +25,7 @@ html(lang="en")
                         input.form-control(type='search' placeholder='Поиск...' aria-label='Search')
                     if user
                         .dropdown.text-end
-                            a.d-block.link-body-emphasis.text-decoration-none.dropdown-toggle(href='#' data-bs-toggle='dropdown' aria-expanded='false')
-                                img.rounded-circle(src='https://github.com/mdo.png' alt='mdo' width='32' height='32')
+                            a.d-block.link-body-emphasis.text-decoration-none.dropdown-toggle(href='#' data-bs-toggle='dropdown' aria-expanded='false')= user.email
                             ul.dropdown-menu.text-small
                                 li
                                     a.dropdown-item(href='/profile') Личный кабинет
@@ -39,4 +39,4 @@ html(lang="en")
                         a.btn.btn-primary(href='/login') Войти
         main.container
             block content
-        script(src="/public/main.bundle.js")
+        script(src="/public/bootstrap.bundle.min.js")
